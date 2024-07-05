@@ -7,7 +7,6 @@ builder.Services.AddDbContext<DataContextFull>(options => options.UseSqlite(conn
 builder.Services.AddDbContext<DataContextPartial>(options => options.UseSqlite(connectionString));
 
 var app = builder.Build();
-app.MapGet("/db/full", (DataContextFull db) => "Hello World!");
-app.MapGet("/db/partial", (DataContextPartial db) => "Hello World!");
-
+app.MapGet("/db/full", (DataContextFull db) => string.Join("\n", db.People));
+app.MapGet("/db/partial", (DataContextPartial db) => string.Join("\n", db.People));
 app.Run();
